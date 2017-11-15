@@ -1,60 +1,31 @@
-# Sense Contract Interaction
+# Sense Network Documentation
 
-## Knowledge Attribution Contract
+Documentation for interacting with Sense network contracts.
 
-The knowledge attribution contract is currently implemented in beta for Github and Reddit. After the approved attributor processes a data set (in this case Github and Reddit profiles) for Sense block worth, a request to mine a block is called via the attribution contract.
+## Prerequisites
 
-Here is an example using web3.py
-```
-def attribute_data(self):
-    print("trying to attribute")
-    result = self.contract2.transact({'from':
-      self.oracle_address}).mineBlock(self.data_payload, self.attr_address)
-    print("result txn:", result)
-    return result
-```
+* [Ropsten Testnet node](https://github.com/ethereum/ropsten)
+* [Pre-approval for attribution developers](#developer approval)
+* [Web3 Client](#contract interactions)
 
-A txn_hash is returned to the developer for tracking status of block mine. The request for a block must include the following parameters:
+## Developer Approval
 
-1. Wallet ID of data source
-2. Source - Github, Reddit, or other valid data sources.
-3. URL - This is an encoded url using Sense public key where the full data can be retrieved async.
+Developers can work on different ways to contribute contacts and data to the Sense Network. Data sets can be mined to assign different knowledge attributes or categories to a specific ERC-20 Wallet ID.
 
-Sample:
-```
-{"data_url":"hlV9BWSe6Cn1shTV81qK6C1liTM9-8mE91kCEfz86Ktkoktj1jBmOzllwtdZiIQ-4946bAUlitCpYLUsZLnApSxr-yM0MqFH0O2hya_IwK25nPRwC6B2SmYSmps2Fk-Xj_Vhd925-IH_rByux2Q62idYcweXDVswDYD_CkgNZJ8kPhPTuU2nCa5ERkYiok-O5FgND1PJc7ngW4h21pdNd3OjnM65eno1qT-o5jCROjw5WGPO8Mt88JuQnLH-M6lhdYVdEcgPtN5QhYX7y3N3aq8JzyQWuAw4e_KfkIBBCSxDuEHuhycnNwb4hqeLwysVBoXd6qhr7bNhpuG11YCBHbrRnXwngLXNnB57V88mWbadGJWiK3b5grNtzkKUgES6mSAvhPEyiI3lxyJT5intvuPhKKKZK-bhP_jC4ewiBdqgdj6H31xzXZqmoEFRQ25tQdSH9bUogB0aLl1eXwLCjgIqidogUWwb5HZtEiWItdAT6kqEtKUM2D5tKyBN6AdEursmcSBFjzH48PFPF0PR6nVcPPa6Gatqz2KgwINmLAmW-5UFLJ2sHYPxo1faUvnIBPstTcecE0s8237gzpysCJG2rwkYFNSRb6J8fMBN5VSssrHV1Rmh1c_Jze9Nldsfrpf5yAjMkZCPgb3_qTSSEEJnmSOrFMzO5Zf8m2hNS8A=","credit_id":"hashofcreditattributionrecord","attr_address":"0xcc036143c68a7a9a41558eae739b428ecde5ef66"}
-```
+There are currently two samples of this, with different data sets.
 
-In the above sample, the `data_url` field is the result of encoding this developers url, with the credit_id record. For example: `https://approved-attributor.com/api/full_record/:credit_id` where `:credit_id` is `hashofcreditattributionrecord`.
+# Sensay
 
-Once the request is received, the sense network server will access that URL for the full data payload. The full data payload needs to include:
+Sensay is the first app to leverage the Sense Network. As users have chats on the Sensay platform, data points on those users are assigned. Once the data is categorized, and user is determined knowledgeable on a subject the data is prepared to be mined via the [Attribution Contract](#attribution).
 
-* wallet_id
-* source
-* categories
-* full searchable data set
+# MakeSense
 
+MakeSense takes a different approach to attributing knowledge to users. Users can oAuth with either GitHub or Reddit, and the app will scan data and form a knowledge profile on the user. The profile can be broken down into different knowledge categories (i.e. Developer, Startups, Blockchain). Again, these data points are normalized to be mined via the [Attribution Contract](#attribution).
 
-## Knowledge Access Contract
+A developer can have a different approach in determing a certain user is knowledgeable in a category or subject. This can be through scanning profiles, creating chat applications / bots, gamification or other means. Once enough data points are built to validate a certain level of knowledge, a request to attribute the data and mine a block via the attribution contract can be made.
 
-The knowledge access contract can be accessed through a light html layer to format the search options. Web3.js will be used to actually transact with the contract. The transaction will need to be signed. At this moment we are using [MetaMask](https://metamask.io) to accomplish this.
+This requires developers to be thorough and mindful in their block requests in order to keep the quality of data attributed high. For this reason, all developers must be pre-approved in order to become attribution contract imners.
 
-The request, the appropriate gas and tokens are required for the contract call to be made. We've put a lot of thought into queuing the data requests through the blockchain. First there's a record of the transaction, and it serves as a guard against overloading the network with bogus searches.
+A proposal on how to attribute data, which data points will be analyzed and what constitutes a request for a block should be submitted via developers@makesense.com for review. A ERC-20 Wallet ID for the developer is also required.
 
-The request is a standard smart contract type call:
-NOTE: Pseudo Code / Contract - Not the actual ABI
-```
-var contractDesc = [{"constant":false,"inputs":[],"name":"getNumber","outputs":[{"name":"_next","type":"int8"}],"type":"function"}];
-var account = "0x80e0f7955f537d3fb6f57a39b6fde389afb957b8";
-var contract = web3.eth.contract(account, contractDesc);
-var response = contract.call().getNumber();
-console.log(String(response));
-```
-
-The challenge now is in delivering the data back to the user once the request has been processed. Our initial implementation will open up a temporary web socket connection with a unique and encoded name parameter to our search request server. Once the request is processed, the results will be delivered via this socket connection.
-
-```
-var socket_connection = new WebSocket('ws://sense-search-server.com/', 'wallet_id+unique_request_id')
-```
-
-The connection will be kept alive only on a temporary basis post delivery of search data.
+If approved, the contract holder will approve the developer's wallet via the smart contract. This will allow the developer to transact with the `mineBlock` function to attribute data.
