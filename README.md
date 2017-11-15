@@ -14,13 +14,15 @@ Developers can work on different ways to contribute contacts and data to the Sen
 
 There are currently two samples of this, with different data sets.
 
-# Sensay
+### Sensay
 
 Sensay is the first app to leverage the Sense Network. As users have chats on the Sensay platform, data points on those users are assigned. Once the data is categorized, and user is determined knowledgeable on a subject the data is prepared to be mined via the [Attribution Contract](#attribution).
 
-# MakeSense
+### MakeSense
 
 MakeSense takes a different approach to attributing knowledge to users. Users can oAuth with either GitHub or Reddit, and the app will scan data and form a knowledge profile on the user. The profile can be broken down into different knowledge categories (i.e. Developer, Startups, Blockchain). Again, these data points are normalized to be mined via the [Attribution Contract](#attribution).
+
+### Developer Partnerships
 
 A developer can have a different approach in determing a certain user is knowledgeable in a category or subject. This can be through scanning profiles, creating chat applications / bots, gamification or other means. Once enough data points are built to validate a certain level of knowledge, a request to attribute the data and mine a block via the attribution contract can be made.
 
