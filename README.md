@@ -6,7 +6,11 @@ Documentation for interacting with Sense network contracts.
 
 * [Ropsten Testnet node](https://github.com/ethereum/ropsten)
 * [Pre-approval for attribution developers](#developer-approval)
-* [Web3 Client](#contract-interactions)
+* [Web3 Client](#web3-client)
+
+## Contract Interaction Samples
+* [Attribution Contract](/know/README.md)
+* [Search Contract](/search/README.md)
 
 ## Developer Approval
 
@@ -30,4 +34,13 @@ This requires developers to be thorough and mindful in their block requests in o
 
 A proposal on how to attribute data, which data points will be analyzed and what constitutes a request for a block should be submitted via developers@makesense.com for review. A ERC-20 Wallet ID for the developer is also required.
 
-If approved, the contract holder will approve the developer's wallet via the smart contract. This will allow the developer to transact with the `mineBlock` function to attribute data.
+If approved, the contract holder will approve the developer's wallet via the smart contract. This will allow the developer to transact with the `mineBlock` function from the attribution contract. ABI and attribution contract address will also be issued.
+
+For testnet portion of attribution, Sense Network will maintain concensus of data quality, and for continuing quality of a developers block requests. There is work going on to defer this governance to approved developers, with a shared interest in maintaining data quality and fair requests for blocks.
+
+### Web3 Client
+
+A client to interact with the Ethereum API (JSON-RPC) will be needed, whether interacting from the frontend or server side. Currently the two clients we recommend are the following:
+
+* [web3.js](https://github.com/ethereum/web3.js)
+* [web3.py](https://github.com/pipermerriam/web3.py)
