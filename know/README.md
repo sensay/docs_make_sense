@@ -1,10 +1,10 @@
-# Sense Contract Interaction
+# Knowledge Attribution Contract
 
-## Knowledge Attribution Contract
+## Contract Interaction Samples
 
 The knowledge attribution contract is currently implemented in beta for Github and Reddit. After the approved attributor processes a data set (in this case Github and Reddit profiles) for Sense block worth, a request to mine a block is called via the attribution contract.
 
-Here is an example using web3.py
+An example using web3.py
 ```
 def attribute_data(self):
     print("trying to attribute")
