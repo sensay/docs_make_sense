@@ -5,8 +5,8 @@ Documentation for interacting with Sense network contracts.
 ## Prerequisites
 
 * [Ropsten Testnet node](https://github.com/ethereum/ropsten)
-* [Pre-approval for attribution developers](#developer approval)
-* [Web3 Client](#contract interactions)
+* [Pre-approval for attribution developers](#developer-approval)
+* [Web3 Client](#contract-interactions)
 
 ## Developer Approval
 
