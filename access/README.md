@@ -1,4 +1,4 @@
-# Search Contract
+# Access Contract
 
 ## Contract Interaction Samples
 
@@ -12,7 +12,7 @@ The request is a standard smart contract type call:
 'use strict';
 
 const Web3 = require('web3')
-const abi = require('../searchabi')
+const abi = require('../accessabi')
 
 let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
 let searchAddress = '0x691ed3fff27bf63f9de4e22a21a88182b341446a'
@@ -43,6 +43,10 @@ For test implementation a websocket will be opened to the search server using th
 var socket_connection = new WebSocket('ws://sense-search-server.com/', 'wallet_id+unique_request_id')
 ```
 
-SENSE team will provide first search page. However developers can implement their own portals to specify custom filters or target specific data consumers. If the socket option is used, the same strategy as above can be used. The connection will be kept alive only on a temporary basis post delivery of search data.
+SENSE team will provide first search page to interact with the Acess Contract. However developers can implement their own portals to specify custom filters or target specific data consumers. If the socket option is used, the same strategy as above can be used. The connection will be kept alive only on a temporary basis post delivery of search data.
 
 If callback to web2.0 server is used, then an address and endpoint with any authentication should be provided in this field. This should be encrypted with Sense Network's public key.
+
+The response will be in json format in both delivery mechanisms.
+
+```{"results": {"contacts": ["0xA95E362c7CA86e024224C8FB7595bD4c6E8F6217", "0xdE7F40e40C094fB06b1791F3028ed1F045e84CEb", "0x91abca173d8cd0087542a120d266900737c98f51"]}, "query": "blockchain developers", "request_type": "contacts", "received": "ok", "requested_transaction": "0x00c1b6f5d5939bd8c71b3c37ce830321c47dbcdb"}```

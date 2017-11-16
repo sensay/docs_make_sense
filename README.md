@@ -10,7 +10,7 @@ Documentation for interacting with Sense network contracts.
 
 ## Contract Interaction Samples
 * [Attribution Contract](/know/README.md)
-* [Search Contract](/search/README.md)
+* [Access Contract](/access/README.md)
 
 ## Developer Approval
 
