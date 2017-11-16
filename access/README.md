@@ -1,4 +1,4 @@
-# Access Contract
+# Knowledge Access Contract
 
 ## Contract Interaction Samples
 
