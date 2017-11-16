@@ -2,16 +2,44 @@
 
 ## Contract Interaction Samples
 
+### MakeSense Sample
+
 The knowledge attribution contract is currently implemented in beta for Github and Reddit. After the approved attributor processes a data set (in this case Github and Reddit profiles) for Sense block worth, a request to mine a block is called via the attribution contract.
 
 An example using web3.py
-```
-def attribute_data(self):
-    print("trying to attribute")
-    result = self.contract2.transact({'from':
-      self.oracle_address}).mineBlock(self.data_payload, self.attr_address)
+
+```python
+from web3 import Web3, HTTPProvider, IPCProvider
+import os
+from os.path import basename, join
+import json
+
+attr_contract_address = '0x....'
+
+def callback(res):
+  txn_hash = res.get('transactionHash')
+  print('Transaction Hash:', txn_hash)
+
+class ContractHandler:
+  def __init__(self, attr_address, data_payload):
+    self.web3 = Web3(HTTPProvider('http://localhost:8545'))
+    with open(str('attributionabi.json'), 'r') as abi_definition:
+      self.abi = json.load(abi_definition)
+    self.attr_contract = self.web3.eth.contract(self.abi, attr_contract_address)
+    self.oracle_address = self.web3.eth.accounts[0]
+    self.attr_address = attr_address
+    self.data_payload = data_payload
+
+  def attribute_data(self):
+    result = self.attr_contract.transact({'from':
+        self.oracle_address}).mineBlock(self.data_location, self.attr_address)
     print("result txn:", result)
     return result
+```
+
+```
+>>> contract = ContractHandler(attr_wallet, data)
+>>> txn_hash = contract.attribute_data()
 ```
 
 A txn_hash is returned to the developer for tracking status of block mine. The request for a block must include the following parameters:

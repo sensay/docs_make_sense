@@ -34,7 +34,7 @@ This requires developers to be thorough and mindful in their block requests in o
 
 A proposal on how to attribute data, which data points will be analyzed and what constitutes a request for a block should be submitted via developers@makesense.com for review. A ERC-20 Wallet ID for the developer is also required.
 
-If approved, the contract holder will approve the developer's wallet via the smart contract. This will allow the developer to transact with the `mineBlock` function from the attribution contract. ABI and attribution contract address will also be issued.
+If approved, the contract holder will approve the developer's wallet via the smart contract. This will allow the developer to transact with the `mineBlock` function from the attribution contract. Attribution contract address will also be issued.
 
 For testnet portion of attribution, Sense Network will maintain concensus of data quality, and for continuing quality of a developers block requests. There is work going on to defer this governance to approved developers, with a shared interest in maintaining data quality and fair requests for blocks.
 
