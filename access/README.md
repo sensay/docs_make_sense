@@ -16,10 +16,16 @@ const abi = require('../accessabi')
 
 let web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
 let searchAddress = '0x691ed3fff27bf63f9de4e22a21a88182b341446a'
+let search = {
+  search: ["blockchain developers"],
+  search_type: "contacts",
+  callback: "myserver.com/results",
+  sense_tokens: 100
+}
 
 module.exports = function search(address, id, search, callback, cb) {
-  var search = web3.eth.contract(abi)
-  var searchInst = search.at(searchAddress)
+  var searchContract = web3.eth.contract(abi)
+  var searchInst = searchContract.at(searchAddress)
 
   searchInst.search(id, search, callback, {from:address, gas: 500000}, (err, res) => {
     var myEvent = searchInst.Request().watch ( (err, response) => {
@@ -48,5 +54,24 @@ SENSE team will provide first search page to interact with the Acess Contract. H
 If callback to web2.0 server is used, then an address and endpoint with any authentication should be provided in this field. This should be encrypted with Sense Network's public key.
 
 The response will be in json format in both delivery mechanisms.
-
-```{"results": {"contacts": ["0xA95E362c7CA86e024224C8FB7595bD4c6E8F6217", "0xdE7F40e40C094fB06b1791F3028ed1F045e84CEb", "0x91abca173d8cd0087542a120d266900737c98f51"]}, "query": "blockchain developers", "request_type": "contacts", "received": "ok", "requested_transaction": "0x00c1b6f5d5939bd8c71b3c37ce830321c47dbcdb"}```
+```javascript
+{
+  "results": {
+    "user_ids": [
+      "0xA95E362c7CA86e024224C8FB7595bD4c6E8F6217",
+      "0xdE7F40e40C094fB06b1791F3028ed1F045e84CEb",
+      "0x91abca173d8cd0087542a120d266900737c98f51"
+    ]
+  },
+  "query": "blockchain developers",
+  "request_type": "contacts",
+  "received": "ok",
+  "requested_transaction": "0x00c1b6f5d5939bd8c71b3c37ce830321c47dbcdb",
+  "sense_spent": 40,
+  "user_attributions": [{
+    "0xA95E362c7CA86e024224C8FB7595bD4c6E8F6217": 10,
+    "0xdE7F40e40C094fB06b1791F3028ed1F045e84CEb": 10,
+    "0x91abca173d8cd0087542a120d266900737c98f51": 10,
+  }]
+}
+```
