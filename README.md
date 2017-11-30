@@ -35,7 +35,7 @@ A developer can have a different approach in determing a certain user is knowled
 
 This requires developers to be thorough and mindful in their block requests in order to keep the quality of data attributed high. For this reason, all developers must be pre-approved in order to become attribution contract imners.
 
-A proposal on how to attribute data, which data points will be analyzed and what constitutes a request for a block should be submitted via makers@makesense.com for review. A ERC-20 Wallet ID for the developer is also required.
+A proposal on how to attribute data, which data points will be analyzed and what constitutes a request for a block should be submitted via developers@makesense.com for review. A ERC-20 Wallet ID for the developer is also required.
 
 If approved, the contract holder will approve the developer's wallet via the smart contract. This will allow the developer to transact with the `mineBlock` function from the attribution contract. Attribution contract address will also be issued.
 
