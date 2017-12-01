@@ -23,7 +23,7 @@ let search = {
   sense_tokens: 100
 }
 
-module.exports = function search(address, id, search, callback, cb) {
+function search(address, id, search, callback, cb) {
   var searchContract = web3.eth.contract(abi)
   var searchInst = searchContract.at(searchAddress)
 
@@ -37,6 +37,8 @@ module.exports = function search(address, id, search, callback, cb) {
   })
 }
 ```
+
+Calling the `search` method will tregger Metamask to prompt the user for approval of transaction. If approved, the transaction will be submitted at which point the Sense Network search server will process the request.
 
 The callback argument serves as a delivery mechanism. There are different posibilities for delivering search results once request is registered in the blockchain.
 
